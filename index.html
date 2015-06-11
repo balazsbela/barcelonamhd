@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+      body {
+        background-color: #F0F0F0;
+      }    
+    </style>
+    <link href='./clavier/clavier.css' rel='stylesheet' type='text/css' />
+
+    <script type="text/javascript" src="synth/platform.js"></script>
+
+    <link rel="import" href="webcomponents/polymer.html">
+    <link rel="import" href="webcomponents/controls.html">
+
+    <script type="text/javascript" src="synth/midi.js"></script>
+    <script type="text/javascript" src="synth/waveshaper.js"></script>
+    <script type="text/javascript" src="synth/synth.js"></script>
+    <script type="text/javascript" src="synth/ui.js"></script>
+
+  </head>
+  <body>
+    <script src='./clavier/teoria.js'></script>
+    <script src='./clavier/clavier.js'></script>
+    <script>
+      var clavier = new Clavier(700, 200);
+      clavier.appendTo(document.body);
+
+      var pressed = null;
+
+      clavier.on('mousedown', function(e) {
+        pressed = e.target;
+        pressed.classList.add('pressed');
+      });
+
+      clavier.on('mouseup', function() {
+        if (pressed) {
+          pressed.classList.remove('pressed');
+          pressed = null;
+        }
+      });
+
+      // Show a Dm#11 chord on the piano
+      // teoria.chord('Dm#11', 1).notes().forEach(function(note) {
+      //   clavier.key(note.key() - 1).classList.add('pressed');
+      // });
+    </script>
+
+
+        <div id="synthbox">
+
+        <div id="keybox" touch-action="none">
+        <div id="blackkeys">
+            <span id="k61" class="black key"></span><span id="k63" class="black key"></span><span class="spacer"></span><span id="k66" class="black key"></span><span id="k68" class="black key"></span><span id="k70" class="black key"></span><span class="spacer"></span><span id="k73" class="black key"></span><span id="k75" class="black key"></span><span class="spacer"></span><span id="k78" class="black key"></span><span id="k80" class="black key"></span><span id="k82" class="black key"></span>
+        </div>
+        <span id="k60" class="white key"></span><span id="k62" class="white key"></span><span id="k64" class="white key"></span><span id="k65" class="white key"></span><span id="k67" class="white key"></span><span id="k69" class="white key"></span><span id="k71" class="white key"></span><span id="k72" class="white key"></span><span id="k74" class="white key"></span><span id="k76" class="white key"></span><span id="k77" class="white key"></span><span id="k79" class="white key"></span><span id="k81" class="white key"></span><span id="k83" class="white key"></span>
+    </div>
+
+  </body>
+</html>
