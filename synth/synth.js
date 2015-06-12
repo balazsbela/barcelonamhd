@@ -127,6 +127,8 @@ function noteOn( note, velocity ) {
 		var e = document.getElementById( "k" + note );
 		if (e)
 			e.classList.add("pressed");
+
+		clavier.key(note - currentRootOffset).classList.add("pressed");
 	}
 }
 
@@ -138,6 +140,9 @@ function noteOff( note ) {
 		var e = document.getElementById( "k" + note );
 		if (e)
 			e.classList.remove("pressed");
+
+		clavier.key(note - currentRootOffset).classList.remove("pressed");
+
 	}
 
 }
@@ -664,6 +669,8 @@ function keyDown( ev ) {
 	if (note)
 		noteOn( note + 12*(3-currentOctave), 0.75 );
 	console.log( "key down: " + ev.keyCode );
+
+	 //clavier.key(ev.keyCode).classList.add('pressed');
 
 	return false;
 }

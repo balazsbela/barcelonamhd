@@ -27,17 +27,30 @@
     <script src='./clavier/clavier.js'></script>
     <script>
       var clavier = new Clavier(700, 200);
+
+      var currentRootOffset = 43;
+
       clavier.appendTo(document.body);
 
       var pressed = null;
 
       clavier.on('mousedown', function(e) {
         pressed = e.target;
+
+        var note = parseInt(clavier.indexOf(pressed) + currentRootOffset);
+
+        noteOn( note + 12*(3-currentOctave), 0.75 );
+
         pressed.classList.add('pressed');
       });
 
       clavier.on('mouseup', function() {
         if (pressed) {
+
+          var note = parseInt(clavier.indexOf(pressed) + currentRootOffset);
+
+          noteOff( note + 12*(3-currentOctave), 0.75 );
+
           pressed.classList.remove('pressed');
           pressed = null;
         }
